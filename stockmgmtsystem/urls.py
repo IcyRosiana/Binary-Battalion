@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from stockmanagesys import views
+
+
 
 urlpatterns = [
-    path('', views.home, name='home'),
-    path('users/',include('django.contrib.auth.urls')),
-    path('users/',include('users.urls')),  
-    path('admin/', admin.site.urls)
+    path('admin/', admin.site.urls),
+    path('', include('stockmanagesys.urls')),
 ]
+
+
+

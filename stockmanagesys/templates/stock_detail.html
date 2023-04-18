@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div  class="position-absolute top-50 start-50 translate-middle">
+  <div class="card" style="width: 25rem;">
+    <div class="card-body">
+      <h5 class="card-title">Item name : <br> {{queryset.item_name}} </h5>
+      <p class="card-text">Category : <br> {{queryset.category}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Available units : <br> {{queryset.quantity}}</li>
+      <li class="list-group-item">Reorder level : {{ queryset.reorder_level}}</li>
+      <li class="list-group-item">Last transaction : <br> {{queryset.last_updated}}</li>
+      <li class="list-group-item">Item added on : <br> {{queryset.timestamp}}</li>
+      <li class="list-group-item">Added by : <br> {{queryset.created_by}}</li>
+    </ul>
+  </div>
+  <br>
+  <a href="{% url 'list_item' %}"><div class='btn btn-dark' >Back</div></a>
+  <a href="{% url 'issue_items' queryset.id %}"><div class='btn btn-danger' >Issue this item</div></a>
+  {% if user.is_staff %}
+  <a href="{% url 'reorder_level' queryset.id %}"><div class='btn btn-primary' >Reorder Level</div></a>
+  <a href="{% url 'receive_items' queryset.id %}"><div class='btn btn-primary' >Restock</div></a>
+  {% endif %}
+
+</div>        
+
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="position-absolute top-50 start-50 translate-middle">
+  <div class="container mt-5">
+    <h1>{{ title }}</h1>
+    <form method="POST" class="mt-4">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <button type="submit" class="btn btn-primary">Restock</button>
+      <a href="{% url 'stock_detail' pk=stock_item.id %}"><div class='btn btn-dark' >Cancel</div></a>
+    </form>
+    <hr>
+    <h4>Current Stock: {{ stock_item.quantity }}</h4>
+  </div>
+</div>
+{% endblock %}

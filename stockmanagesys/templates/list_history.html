@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+
+   
+
+    <div class="row"><!--Start of row-->
+      <div class="col-sm-2"><!--Start of first col-->  
+        <form method='POST' action=''>{% csrf_token %}
+                {{form|crispy}}
+                <input type="submit" value='Search'/>
+        </form>
+      </div>
+      <div class="col-sm-10"><!--Start of second col-->
+          <div class="display_table">
+                <table class='table'>
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Category</th>
+                      <th>Item Name</th>
+                      <th>Available Quantity</th>
+                      <th>Issued Quantity</th>
+                      <th>Issued By</th>
+                      <th>Restock Quantity</th>
+                      <th>Restock By</th>
+                      <th>Updated On</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                {% for instance in query %}
+                    <tr>
+                      <td>{{instance.id}}</td>
+                      <td>{{instance.category}}</td>
+                      <td>{{instance.item_name}}</td>
+                      <td>{{instance.quantity}}</td>
+                      <td>{{instance.issue_quantity}}</td>
+                      <td>{{instance.issue_by}}</td>
+                      <td>{{instance.receive_quantity}}</td>
+                      <td>{{instance.receive_by}}</td>
+                      <td>{{instance.last_updated}}</td>
+                      <td></td>
+                    </tr>
+                {% endfor %}
+              </table>
+            </div>
+          </div>
+        </div> 
+<hr><br><br>
+<!---
+{% if query.has_previous %}
+
+  <a href="?page=1">« First</a>
+  <a href="?page={{ query.previous_page_number }}">Previous</a>
+
+{% endif %}
+
+Page {{ query.number }} of {{ query.paginator.num_pages }}
+
+{% if query.has_next %}
+
+  <a href="?page={{ query.next_page_number }}">Next</a>
+  <a href="?page={{ query.paginator.num_pages }}">» Last</a>
+
+{% endif %}
+-->
+
+{% endblock %}
