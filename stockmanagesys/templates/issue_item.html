@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+
+{% block content %}
+<div class="position-absolute top-50 start-50 translate-middle">
+  <h1>{{ title }}</h1>
+  <p>Quantity Available: {{ quantity_available }}</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="submit" class='btn btn-success' value="Confirm"/>
+    <a href="{% url 'stock_detail' pk=stock_item.id %}"><div class='btn btn-dark' >Cancel</div></a>
+  </form>
+</div>
+{% endblock %}
