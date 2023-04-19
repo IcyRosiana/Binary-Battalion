@@ -3,6 +3,7 @@ from .models import Stock, Category
 from .forms import StockCreateForm
 
 
+
 class StockCreateAdmin(admin.ModelAdmin):
    list_display = ['category', 'item_name', 'quantity']
    form = StockCreateForm

@@ -143,6 +143,7 @@ class StockCreateForm(forms.ModelForm):
 
 #OK na
 class CategoryForm(forms.ModelForm):
+    name = forms.CharField(max_length=100, required=True)
     class Meta:
         model = Category
         fields = ['name']

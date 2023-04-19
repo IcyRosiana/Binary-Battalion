@@ -14,12 +14,12 @@
                 <br><br>
                 <form method='POST' action=''>{% csrf_token %}
                     {{form|crispy}}
-                        <input class="btn btn-primary " type="submit" value='Search/Export'/>
+                        <input class="btn btn-secondary " type="submit" value='Search/Export'/>
                     </form><br>
-                    <a href="/add_items"><div class="btn btn-primary mybutton">Add Item</div></a><br><br>
+                    <a href="/add_items"><div class="btn btn-secondary mybutton">Add Item</div></a><br><br>
                     {% if user.is_staff %}
-                    <a href="/add_category"><div class="btn btn-primary mybutton">Add Category</div></a><br><br>
-                    <a href="/list_history"><div class ="btn btn-primary mybutton">History</div></a><br><br>
+                    <a href="/add_category"><div class="btn btn-secondary mybutton">Add Category</div></a><br><br>
+                    <a href="/list_history"><div class ="btn btn-secondary mybutton">History</div></a><br><br>
                     {% endif %}
                   <br>
               </div>
@@ -29,9 +29,9 @@
                   <br>
                   <div class="display_table align-middle ">
                         <table class='table table-striped table-hover table-bordered '>
-                          <thead class='table-dark'>
+                          <thead class='table-light'>
                             <tr>
-                              <th>COUNT</th>
+                              
                               <th class="text-center">CATEGORY</th>
                               <th class="text-center">ITEM NAME</th>
                               <th class="text-center">QUANTITY IN STORE</th>
@@ -45,25 +45,17 @@
                           </thead>
                         {% for instance in queryset %}
                             <tr>
-                              <td>{{forloop.counter}}</td>  
+                              
                               <td class="text-center"><a href="{% url 'update_items' instance.id %}">{{instance.category}}</a></td>
                               <td class="text-center"><a href="{% url 'stock_detail' instance.id %}">{{instance.item_name}}</a></td>
                               <td class="text-center">
-                              {% if user.is_staff %}  
                                     {% if instance.quantity <= instance.reorder_level %}
-                                        <div style="background-color: orange;">
+                                        <div style="background-color:#641E16">
                                           {{instance.quantity}}    
                                         </div>
                                     {% else %}
                                         {{instance.quantity}}
                                     {% endif %}
-                              {% else %}
-                                    {% if instance.quantity <= instance.reorder_level %}
-                                        <div style="background-color: orange;">{{instance.quantity}}</div>
-                                    {% else %}
-                                        {{instance.quantity}}
-                                    {% endif %}
-                              {% endif %}
                               </td>
                               <td class="text-center">{{instance.last_updated}}</td>
                               {% if user.is_staff %}
@@ -76,6 +68,7 @@
               </div>
             </div>
         </main>
+          
 <hr><br><br>
 <!---
 {% if query.has_previous %}

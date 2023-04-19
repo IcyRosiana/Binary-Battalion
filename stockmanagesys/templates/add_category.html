@@ -9,6 +9,7 @@
   <form method="POST">
     {% csrf_token %}
     {{ form|crispy }}
-    <div class='btn btn-dark'type="submit">Add Category</div>
+    <button type="submit" class="btn btn-success">Add Category</button>
+    <a href="{% url 'home' %}"><div class='btn btn-secondary' >Cancel</div></a>
   </form>
 {% endblock %}

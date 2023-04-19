@@ -39,3 +39,4 @@ class Stock_History_log(models.Model):
 	reorder_level = models.IntegerField(default='0', blank=True, null=True)
 	last_updated = models.DateTimeField(auto_now_add=False, auto_now=True, null=True)
 	timestamp = models.DateTimeField(auto_now_add=True, auto_now=False, null=True)
+	

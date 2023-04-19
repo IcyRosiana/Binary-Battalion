@@ -9,8 +9,8 @@
   <form method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="submit" class='btn btn-success' value="Save"/>
-    <a href="{% url 'list_item' %}"><div class='btn btn-dark' >Cancel</div></a>
+    <input type="submit" class='btn btn-success' value="Confirm"/>
+    <a href="{% url 'list_item' %}"><div class='btn btn-secondary' >Cancel</div></a>
   </form>
 </div>
 {% endblock %}

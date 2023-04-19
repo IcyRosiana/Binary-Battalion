@@ -17,7 +17,7 @@ urlpatterns = [
     path('reorder_level/<str:pk>/', views.reorder_level, name="reorder_level"),
     path('list_history/', views.list_history, name='list_history'),
     path('add_category/', views.add_category, name='add_category'),
-    path('user_profile', views.user_profile, name='user_profile'),
+    #path('user_profile', views.user_profile, name='user_profile'),
     
 
 

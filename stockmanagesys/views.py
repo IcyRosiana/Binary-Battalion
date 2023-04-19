@@ -9,6 +9,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 from django.core.paginator import Paginator
 from django.db.models import F, Q 
+from django.contrib.auth import update_session_auth_hash
 
 
 @login_required
@@ -39,7 +40,6 @@ def issue_items(request, pk):
     return render(request, "issue_item.html", context)
 
 
-
 @login_required
 def add_category(request):
     form = CategoryForm(request.POST or None)
@@ -47,6 +47,7 @@ def add_category(request):
         category = form.save(commit=False)
         category.name = category.name.upper()
         category.save()
+        messages.success(request, 'Category added successfully.')
         return redirect('/list_item')
     context = {
         "form": form,
@@ -102,13 +103,6 @@ def update_items(request, pk):
         "title": 'Update Item name & Category : ' + str(queryset.item_name),
     }
     return render(request, 'add_items.html', context)
-
-
-@login_required
-def user_profile(request):
-     pass
-
-
 
 
 @login_required
@@ -177,16 +171,13 @@ def list_item(request):
             response = HttpResponse(content_type='text/csv')
             response['Content-Disposition'] = 'attachment; filename="Stock_List.csv"'
             writer = csv.writer(response)
-            writer.writerow(['CATEGORY', 'ITEM NAME', 'QUANTITY'])
+            writer.writerow(['CATEGORY', 'ITEM NAME', 'QUANTITY', 'LAST TRANSACTION ', 'CREATED ON','CREATED BY'])
             instance = queryset
             for stock in instance:
-                writer.writerow([stock.category, stock.item_name, stock.quantity])
+                writer.writerow([stock.category, stock.item_name, stock.quantity, stock.last_updated, stock.timestamp, stock.created_by])
             return response
 
     return render(request, "list_item.html", context)
-
-
-
 
 
 
